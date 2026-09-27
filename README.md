@@ -1,44 +1,56 @@
-# QUAD REVERSI（クアッドリバーシ）
+# QUAD REVERSI — Ver. 1.2
 
-4色で対戦する、10×10盤のブラウザーゲームです。
+4色で対戦する10×10リバーシ。A four-color Reversi game on a 10×10 board.
 
-## 遊び方
+## Ver. 1.2 の変更
 
-- 人間の人数を1〜4人から選び、残りの色はCPUが担当します。
-- CPUの難易度は5段階です。
-- 手番順は対局開始時にランダムで決まります。
-- 配置フェーズ：中央4×4の空きマスに1個ずつ置きます。この間は石を返しません。
-- 16マスが埋まると対局フェーズに移り、盤全体に石を置いて他の色を挟みます。
-- 置けない色は自動パス。全員が置けなくなると終了します。
-- 石数が最多の色が勝利。同数トップは引き分けです。
+- CPUの初期配置は、難易度に関係なく中央4×4の空きマスから均等ランダムに選択。
+- 着手時の短いクリック音。
+- オリジナルの自動生成BGM（初期値OFF）。タイトル・設定・対局・結果画面でON/OFFを切り替え可能。
+- 石のハイライトと影を強化。
+- トロフィー、順位、同順位に対応したWinner画面。短い拍手・歓声風の合成効果音。
+- タイトル・設定にVer. 1.2表示。
+- 日本語／ENGLISH切り替え。選んだ言語とBGM設定をブラウザーに保存。
 
-## ファイル
+## 遊び方 / How to play
 
-- `index.html`：画面と操作
-- `engine.mjs`：ルールとCPUの判断
-- `logo.png`：タイトル画面の完成ロゴ
-- `README.md`：この説明書
+1. STARTから人間の人数（1〜4人）とCPU難易度（1〜5）を選択します。
+2. 各色の手番順は毎回ランダムです。最初に中央4×4へ各色4枚、計16枚を置きます。この間は石を返しません。
+3. 対局フェーズでは盤全体を使い、他の色の石を自分の色で挟んだ列を返します。
+4. 置けない色は自動パス。全員置けなくなった時点で石数を比較します。同数トップは引き分けです。
 
-## 起動方法
+Choose human players and CPU difficulty. Place four stones per color in the central area, then bracket other colors to flip their stones. Players with no move pass automatically. Most stones wins; equal top scores share first place.
 
-index.html・engine.mjs・logo.pngを同じフォルダーに置き、HTTPサーバーから開いてください。
-JavaScriptモジュールを使用しているため、HTMLファイルの直接ダブルクリックでは動作しない場合があります。
-Pythonを使う場合は、そのフォルダーで次を実行します。
+## ファイル / Files
+
+- index.html: 画面・操作 / UI
+- engine.mjs: ルール・CPU・順位 / game logic
+- audio.mjs: BGM・効果音の生成 / procedural audio
+- i18n.mjs: 日本語・英語 / translations
+- logo.png: 完成ロゴ / logo
+- README.md: 説明 / documentation
+
+## 公開 / Hosting
+
+上の6ファイルをGitHubリポジトリの同じ階層にアップロードしてください。
+GitHub Pages: Deploy from a branch → main → / (root).
+Upload all six files to the same repository folder. Publish main / (root) with GitHub Pages.
+
+ローカルではHTTPサーバーから開いてください。HTMLの直接ダブルクリックではモジュールが読み込めない場合があります。
 
 ```sh
 python -m http.server 8000
 ```
 
-ブラウザーで http://localhost:8000 を開きます。
-静的サイトのホスティングにも対応しています。
+http://localhost:8000 を開きます。
 
-## 完成版
+## 音声について / Audio
 
-2026年9月27日：難易度を1段階引き上げた5段階CPU版。
-旧難易度2〜5を新難易度1〜4に移し、新難易度5では相手の応手と終盤の石数をさらに重視します。
+外部の録音や音楽ファイルを使わず、Web Audio APIでオリジナルBGMと効果音を生成します。
+音声はボタンなどの操作後に再生されます。端末の音量・ブラウザー設定によっては音が出ない場合があります。
+BGM is off by default. Audio starts after user interaction. No external recordings or music assets are used.
 
-## タイトル画面
+Ⓒmelon0811 All rights reserved.
 
-白背景に完成ロゴ、STARTボタン、Ⓒmelon0811 All rights reserved.を表示します。
-STARTから人数・難易度の設定へ進めます。「タイトルへ戻る」でタイトル画面へ戻れます。
-スマートフォン向けに縦方向の余白と操作ボタンを調整しています。
+
+Ver. 1.2: プレイヤー表示を「赤 プレイヤー１」「青 プレイヤー２」「黄 CPU」に変更。英語は「Red Player１」「Yellow CPU」。色と役割の間は半角スペース、プレイヤー名と全角数字の間にスペースはありません。
